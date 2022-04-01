@@ -168,7 +168,7 @@ Jugador(Sólo abmc de jugador e inscripción)
 
 |Requerimiento funcional|cant. mín.<br>1 o 2 integ|Detalle/Listado de casos|Cumple|
 |:-|-:|:-|-|
-|ABMC simple|1 x integ|
+|ABMC simple|1 x integ|pais, jugador|
 |ABMC dependiente|1|
 |Listado simple|1|
 |Listado complejo obligatorio|1|
