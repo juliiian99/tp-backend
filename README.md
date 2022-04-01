@@ -149,30 +149,13 @@ Un jugador no puede jugar más de una partida en una misma fecha y hora (a la ve
 
 El jugador, realizará una partida de práctica que le indicará el nivel en el que podrá anotarse al torneo.
 
-Al finalizar cada torneo, vamos a sumar los puntajes de cada participante en las fechas que se realizó dicho torneo y almacenar el puntaje total en la tabla nivel por juego. 
-
-Cuando el jugador reuna la cantidad de puntos necesaria en un juego, se subirá de nivel.
-
-## Caso de uso complejo (Nivel resumen)    Denuncia
-los componen el caso de uso Reportar Jugador y el caso de Revisar Denuncia
-
-CUU Reportar Jugador: Un jugador puede reportar a otro en cualquier momento desde la inscripción hasta el final de la competencia.
-
-CUU Revisar denuncia: Los administradores reciben una denuncia a un jugador con una descripción y la analizan en un plazo corto de tiempo.
-
-CUR Evaluar denuncia del Jugador 
-
-## Caso de uso complejo (Nivel resumen)    Todo el torneo
-
+Cuando el jugador reuna la cantidad de puntos necesaria en un juego, podrá inscribirse al torneo correspondiente según el nivel obtenido en la partida de práctica.
 
 ## Niveles de usuario
 
 Administrador (Todos los permisos)
 
 Jugador(Sólo abmc de jugador e inscripción)
-
-Encargado de lista (Solo ver puntajes y publicarlos)
-
 
 # DER_V1.0
 ![image](https://user-images.githubusercontent.com/64239565/161194412-64be31fd-793f-441f-8b46-34fa51eb11f2.png)
