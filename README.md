@@ -158,7 +158,7 @@ Administrador (Todos los permisos)
 Jugador(Sólo abmc de jugador e inscripción)
 
 # DER_V1.0
-![image](https://user-images.githubusercontent.com/64239565/161194412-64be31fd-793f-441f-8b46-34fa51eb11f2.png)
+![image](https://user-images.githubusercontent.com/64239565/161197686-2624103e-ceb0-4869-a723-bc3c99304ca7.png)
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
