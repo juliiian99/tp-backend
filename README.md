@@ -138,7 +138,9 @@ Los torneos por puntaje van a tener una determinada cantidad de partidas en un r
 ## Torneo eliminatorio  
 
 Dependiendo del cupo establecido al crear el Torneo, al cerrar la inscripcion, el Administrador procede al sorteo del Fixture.
-1- Los jugadores están divididos por zonas o grupos (de cantidad ilimitada de participantes o por cupo) y clasifican los primeros 2 de cada grupo. Para luego enfrentarse en eliminatorias (modalidad JCJ) hasta una final. 
+
+1- Los jugadores están divididos por zonas o grupos (de cantidad ilimitada de participantes o por cupo) y clasifican los primeros 2 de cada grupo. Para luego enfrentarse en eliminatorias (modalidad JCJ) hasta una final.
+
 2- Los torneos eliminatorios se enfrentan dos jugadores, previamente sorteados, en el cual sera ganador de la fase el que obtiene mayor puntaje, pasando a la fase siguiente. Todas las eliminatorias proceden del mismo modo hasta llegar a la final, en la que el ganador sera el campeon del Torneo.
 
 ## Jugadores
@@ -181,16 +183,16 @@ Encargado de lista (Solo ver puntajes y publicarlos)
 
 ## Backend
 
-|Requerimiento funcional|cant. mín.<br>1 o 2 integ|cant. máx.<br>3 o 4 integ|Detalle/Listado de casos|Cumple|
+|Requerimiento funcional|cant. mín.<br>1 o 2 integ|Detalle/Listado de casos|Cumple|
 |:-|-:|-:|:-|-|
-|ABMC simple|1 x integ|1 x integ|
-|ABMC dependiente|1|2|
-|Listado simple|1|1|
-|Listado complejo obligatorio|1|2|
-|Listado adicional con filtro|0|0|
-|Detalle básico|1(*)|2(*)|
-|Detalle parametrizable|0|0|
-|Otros|0|0|
+|ABMC simple|1 x integ|
+|ABMC dependiente|1|
+|Listado simple|1|
+|Listado complejo obligatorio|1|
+|Listado adicional con filtro|0|
+|Detalle básico|1(*)|
+|Detalle parametrizable|0|
+|Otros|0|
 
 (\*) Los detalles básicos pueden ser reemplazado por un detalle parametrizados en los
 
