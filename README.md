@@ -178,7 +178,7 @@ Encargado de lista (Solo ver puntajes y publicarlos)
 
 
 # DER_V1.0
-![image](https://user-images.githubusercontent.com/64239565/127723889-43718bb7-a79c-4c42-9814-039742540046.png)
+![image](https://drive.google.com/file/d/1OpA4gjoCJPnf_wDUMX34SnWvWEyn_g0b/view?usp=sharing)
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
