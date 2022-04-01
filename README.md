@@ -184,7 +184,7 @@ Encargado de lista (Solo ver puntajes y publicarlos)
 ## Backend
 
 |Requerimiento funcional|cant. mín.<br>1 o 2 integ|Detalle/Listado de casos|Cumple|
-|:-|-:|-:|:-|-|
+|:-|-:|:-|-|
 |ABMC simple|1 x integ|
 |ABMC dependiente|1|
 |Listado simple|1|
