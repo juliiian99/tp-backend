@@ -121,34 +121,29 @@ Luego de la defensa el resultado puede ser:
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Enunciado
-La inscripción es por tipo de torneo en un rango de fechas determinadas.
+La inscripción al Torneo es por tipo de torneo en un rango de fechas determinadas.
+
+Cada Torneo tiene un cupo límite.
+El Administrador da de alta los periodos de inscripción (Se valida que el jugador no se inscriba antes, y que la fecha en la que el jugador se está intentando inscribir este dentro del periodo de inscripción)
 
 # Torneo
 
 Los tipos de torneos pueden ser eliminatorios o por puntaje. 
 
-Los torneos pueden ser por país, por continente o a nivel mundial.
-
 ## Torneo por puntaje
 Se puede inscribir cualquiera.
 
-Los torneos por puntaje van a tener una determinada cantidad de partidas en un rango  de tiempo establecido. Los tres mejores van a ser los jugadores con la mayor cantidad de puntos finalizado el periodo de competencia.
+Los torneos por puntaje van a tener una determinada cantidad de partidas en un rango de tiempo establecido. El jugador con mayor cantidad de puntos será el ganador del torneo y el administrador deberá cambiar el estado del torneo de Vacante al nombre del usuario ganador.
  
-##Torneo eliminatorio  
+## Torneo eliminatorio  
 
-Se mide por cantidad de victorias.
-
-Los torneos eliminatorios van a tener un periodo de clasificación en el que los jugadores inscritos van a poder jugar una determinada cantidad de partidas en un rango de tiempo establecido (modalidad JCJ).
-
-Los jugadores están divididos por zonas o grupos (de cantidad ilimitada de participantes o por cupo) y clasifican los primeros 2 de cada grupo. Para luego enfrentarse desde octavos hasta una final. 
+Dependiendo del cupo establecido al crear el Torneo, al cerrar la inscripcion, el Administrador procede al sorteo del Fixture.
+1- Los jugadores están divididos por zonas o grupos (de cantidad ilimitada de participantes o por cupo) y clasifican los primeros 2 de cada grupo. Para luego enfrentarse en eliminatorias (modalidad JCJ) hasta una final. 
+2- Los torneos eliminatorios se enfrentan dos jugadores, previamente sorteados, en el cual sera ganador de la fase el que obtiene mayor puntaje, pasando a la fase siguiente. Todas las eliminatorias proceden del mismo modo hasta llegar a la final, en la que el ganador sera el campeon del Torneo.
 
 ## Jugadores
 
-Se dividen por tipo (amateur y profesional).
-
 Un jugador no puede jugar más de una partida en una misma fecha y hora (a la vez).
-
-El jugador, realizará una partida de práctica que le indicará el nivel en el que podrá anotarse al torneo.
 
 El jugador, realizará una partida de práctica que le indicará el nivel en el que podrá anotarse al torneo.
 
