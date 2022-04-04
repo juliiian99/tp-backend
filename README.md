@@ -120,6 +120,11 @@ Luego de la defensa el resultado puede ser:
 [checklist]: ./checklist/README.md
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Datos
+29694 - Jimenez, Dana Marina - rc.danamarina@gmail.com
+
+46180 - Villoria, Julián - juliiianvilloria99@gmail.com
+
 # Enunciado
 La inscripción al Torneo es por tipo de torneo en un rango de fechas determinadas.
 
