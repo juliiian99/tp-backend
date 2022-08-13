@@ -1,33 +1,29 @@
 var express = require('express');
 var router = express.Router();
-var connection = require('../data/dbConnection');
-const PlayerSchema = require('../schemas/jugadorSchema');
+const Jugador = require('../schemas/jugadorSchema');
+const Pais = require('../schemas/paisSchema');
 
 /* GET all users. */
-router.get('/', async function(req, res) {
-  const Jugador = connection.model('Jugador', PlayerSchema);
-  let jugadores = JSON.parse(JSON.stringify(await Jugador.find()));
+router.get('/', async function (req, res) {
+  let jugadores = JSON.parse(JSON.stringify(await Jugador.find().populate('pais')));
   res.json(jugadores);
 });
 
 /* GET user by id. */
-router.get('/:nombre_usuario', async function(req, res) {
-  const Jugador = connection.model('Jugador', PlayerSchema);
+router.get('/:nombre_usuario', async function (req, res) {
   let jugador = JSON.parse(JSON.stringify(await Jugador.findByName(req.params.nombre_usuario)));
   res.status(200).json(jugador);
 });
 
 /* POST new user. */
-router.post('/', async function(req, res) {
-  const Jugador = connection.model('Jugador', PlayerSchema);
-  const nuevoJugador = new Jugador( req.body.jugador );
+router.post('/', async function (req, res) {
+  const nuevoJugador = new Jugador(req.body.jugador);
   await nuevoJugador.save();
   res.status(201).json();
 });
 
 /* UPDATE user by id. */
-router.patch('/:nombre_usuario', async function(req, res) {
-  const Jugador = connection.model('Jugador', PlayerSchema);
+router.patch('/:nombre_usuario', async function (req, res) {
   const filter = { nombre_usuario: req.params.nombre_usuario };
   const update = req.body.jugador;
   await Jugador.updateOne(filter, update);
@@ -35,15 +31,22 @@ router.patch('/:nombre_usuario', async function(req, res) {
 });
 
 /* DELETE user by id */
-router.delete('/:nombre_usuario', function(req, res) {
-  const Jugador = connection.model('Jugador', PlayerSchema);
-  Jugador.deleteOne({ nombre: req.params.nombre_usuario } , function(err) {
+router.delete('/:nombre_usuario', function (req, res) {
+  Jugador.deleteOne({ nombre: req.params.nombre_usuario }, function (err) {
     if (err) {
       res.status(400).json();
-    }else{
+    } else {
       res.status(204).json();
     }
   });
+});
+
+router.post('/:nombre/paises', async function (req, res) {
+  let pais = await Pais.findByName(req.body.nombre);
+  let jugador = await Jugador.findByName(req.params.nombre);
+  jugador.pais = pais;
+  await jugador.save();
+  res.status(201).json();
 });
 
 module.exports = router;
