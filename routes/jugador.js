@@ -11,7 +11,7 @@ router.get('/', async function (req, res) {
 
 /* GET user by id. */
 router.get('/:nombre_usuario', async function (req, res) {
-  let jugador = JSON.parse(JSON.stringify(await Jugador.findByName(req.params.nombre_usuario)));
+  let jugador = JSON.parse(JSON.stringify(await Jugador.findByName(req.params.nombre_usuario).populate('pais')));
   res.status(200).json(jugador);
 });
 
@@ -41,12 +41,24 @@ router.delete('/:nombre_usuario', function (req, res) {
   });
 });
 
-router.post('/:nombre/paises', async function (req, res) {
+router.get('/:nombre_usuario/pais', async function (req, res) {
+  let jugador = JSON.parse(JSON.stringify(await Jugador.findByName(req.params.nombre_usuario).populate('pais')));
+  res.status(200).json(jugador.pais);
+});
+
+router.post('/:nombre_jugador/pais', async function (req, res) {
   let pais = await Pais.findByName(req.body.nombre);
-  let jugador = await Jugador.findByName(req.params.nombre);
+  let jugador = await Jugador.findByName(req.params.nombre_jugador);
   jugador.pais = pais;
   await jugador.save();
   res.status(201).json();
+});
+
+router.delete('/:nombre_jugador/pais', async function (req, res) {
+  let jugador = await Jugador.findByName(req.params.nombre_jugador);
+  jugador.pais = null;
+  await jugador.save();
+  res.status(204).json();
 });
 
 module.exports = router;
