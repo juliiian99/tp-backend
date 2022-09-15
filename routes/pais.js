@@ -19,7 +19,7 @@ router.post('/', async function (req, res) {
 });
 
 /* UPDATE user by id. */
-router.patch('/:nombre', async function (req, res) {
+router.put('/:nombre', async function (req, res) {
     const filter = { nombre: req.params.nombre };
     const update = req.body.pais;
     await Pais.updateOne(filter, update);

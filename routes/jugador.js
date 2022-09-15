@@ -23,7 +23,7 @@ router.post('/', async function (req, res) {
 });
 
 /* UPDATE user by id. */
-router.patch('/:nombre_usuario', async function (req, res) {
+router.put('/:nombre_usuario', async function (req, res) {
   const filter = { nombre_usuario: req.params.nombre_usuario };
   const update = req.body.jugador;
   await Jugador.updateOne(filter, update);
@@ -32,12 +32,8 @@ router.patch('/:nombre_usuario', async function (req, res) {
 
 /* DELETE user by id */
 router.delete('/:nombre_usuario', function (req, res) {
-  Jugador.deleteOne({ nombre: req.params.nombre_usuario }, function (err) {
-    if (err) {
-      res.status(400).json();
-    } else {
-      res.status(204).json();
-    }
+  Jugador.deleteOne({ nombre_usuario: req.params.nombre_usuario }, function (err) {
+    res.status(204).json();
   });
 });
 
