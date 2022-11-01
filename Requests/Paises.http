@@ -1,3 +1,21 @@
 GET http://localhost:3000/paises HTTP/1.1
 Content-Type: application/json
 Accept: */*
+###
+GET http://localhost:3000/paises/Argentina HTTP/1.1
+Content-Type: application/json
+Accept: */*
+###
+POST http://localhost:3000/paises/Argentina HTTP/1.1
+Content-Type: application/json
+Accept: */*
+
+{
+  "pais":{
+    "nombre": "Argentina"
+  }
+}
+###
+DELETE http://localhost:3000/jugadores/Argentina HTTP/1.1
+Content-Type: application/json
+Accept: */*
