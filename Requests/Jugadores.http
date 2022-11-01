@@ -1,0 +1,57 @@
+# Get All
+GET http://localhost:3000/jugadores HTTP/1.1
+Content-Type: application/json
+Accept: */*
+###
+# Get One
+@name = test
+GET http://localhost:3000/jugadores/{{name}} HTTP/1.1
+Content-Type: application/json
+Accept: */*
+###
+# Create
+POST http://localhost:3000/jugadores HTTP/1.1
+Content-Type: application/json
+Accept: */*
+
+{
+  "jugador":{
+    "nombre_usuario": "testing",
+    "nombre": "testing",
+    "apellido": "testing",
+    "contrasena": 123456
+  }
+}
+###
+# Update
+PUT http://localhost:3000/jugadores/testing HTTP/1.1
+Content-Type: application/json
+Accept: */*
+
+{
+  "jugador":{
+    "nombre_usuario": "changed",
+    "nombre": "changed",
+    "apellido": "changed",
+    "contrasena": 123123
+  }
+}
+###
+# Delete
+DELETE http://localhost:3000/jugadores/test HTTP/1.1
+Content-Type: application/json
+Accept: */*
+###
+# Attach
+POST http://localhost:3000/jugadores/changed/pais HTTP/1.1
+Content-Type: application/json
+Accept: */*
+
+{
+  "nombre": "Argentina"
+}
+###
+# Dettach
+DELETE http://localhost:3000/jugadores/changed/pais HTTP/1.1
+Content-Type: application/json
+Accept: */*

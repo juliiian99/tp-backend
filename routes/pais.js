@@ -18,7 +18,6 @@ router.post('/', async function (req, res) {
     res.status(201).json();
 });
 
-/* UPDATE user by id. */
 router.put('/:nombre', async function (req, res) {
     const filter = { nombre: req.params.nombre };
     const update = req.body.pais;
@@ -26,14 +25,9 @@ router.put('/:nombre', async function (req, res) {
     res.status(204).json();
 });
 
-/* DELETE user by id */
 router.delete('/:nombre', function (req, res) {
     Pais.deleteOne({ nombre: req.params.nombre }, function (err) {
-        if (err) {
-            res.status(400).json();
-        } else {
-            res.status(204).json();
-        }
+        res.status(204).json();
     });
 });
 

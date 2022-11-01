@@ -3,26 +3,22 @@ var router = express.Router();
 const Jugador = require('../schemas/jugadorSchema');
 const Pais = require('../schemas/paisSchema');
 
-/* GET all users. */
 router.get('/', async function (req, res) {
   let jugadores = JSON.parse(JSON.stringify(await Jugador.find().populate('pais')));
   res.json(jugadores);
 });
 
-/* GET user by id. */
 router.get('/:nombre_usuario', async function (req, res) {
   let jugador = JSON.parse(JSON.stringify(await Jugador.findByName(req.params.nombre_usuario).populate('pais')));
   res.status(200).json(jugador);
 });
 
-/* POST new user. */
 router.post('/', async function (req, res) {
   const nuevoJugador = new Jugador(req.body.jugador);
   await nuevoJugador.save();
   res.status(201).json();
 });
 
-/* UPDATE user by id. */
 router.put('/:nombre_usuario', async function (req, res) {
   const filter = { nombre_usuario: req.params.nombre_usuario };
   const update = req.body.jugador;
@@ -30,7 +26,6 @@ router.put('/:nombre_usuario', async function (req, res) {
   res.status(204).json();
 });
 
-/* DELETE user by id */
 router.delete('/:nombre_usuario', function (req, res) {
   Jugador.deleteOne({ nombre_usuario: req.params.nombre_usuario }, function (err) {
     res.status(204).json();
@@ -46,6 +41,8 @@ router.post('/:nombre_jugador/pais', async function (req, res) {
   let pais = await Pais.findByName(req.body.nombre);
   let jugador = await Jugador.findByName(req.params.nombre_jugador);
   jugador.pais = pais;
+  pais.jugadores.push(jugador);
+  await pais.save();
   await jugador.save();
   res.status(201).json();
 });
