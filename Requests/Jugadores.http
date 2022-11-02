@@ -4,7 +4,7 @@ Content-Type: application/json
 Accept: */*
 ###
 # Get One
-@name = test
+@name = testing
 GET http://localhost:3000/jugadores/{{name}} HTTP/1.1
 Content-Type: application/json
 Accept: */*
@@ -55,3 +55,28 @@ Accept: */*
 DELETE http://localhost:3000/jugadores/changed/pais HTTP/1.1
 Content-Type: application/json
 Accept: */*
+###
+# Get One Test
+@name = testing
+GET http://localhost:3000/jugadores/{{name}} HTTP/1.1
+
+{{
+  const { expect, assert } = require('chai');
+  test('status code 200', () => {
+    assert.equal(response.statusCode, 200)
+  });
+
+  test('has username', () => {
+    assert.include(JSON.parse(response.body), {nombre_usuario: "testing"})
+  })
+}}
+
+HTTP/1.1 200  - OK
+x-powered-by: Express
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8
+content-length: 131
+etag: W/"83-oVEt8qQplw5rRi7LXECGpDnY9IQ"
+date: Wed, 02 Nov 2022 05:16:01 GMT
+connection: close
+###
