@@ -16,7 +16,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(cors());
 
+const errorHandler = (error, req, res, next) => {
+  res.status(500).send(`Something wrong ${error.message}`)
+};
+
 app.use('/jugadores', jugadoresRouter);
 app.use('/paises', paisRouter);
+app.use(errorHandler);
 
 module.exports = app;
