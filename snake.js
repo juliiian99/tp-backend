@@ -82,6 +82,12 @@ class Snake {
             this.respawn();
           }
         });
+      } else {
+        this.tail.forEach((t) => {
+          if (t.x === this.x && t.y === this.y) {
+            this.respawn();
+          }
+        });
       }
     });
     // With apples
