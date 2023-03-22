@@ -50,10 +50,6 @@ io.on("connection", function (client) {
     io.emit("message", message);
   });
 
-  client.on("disconnect", function () {
-    console.log("A user disconnected");
-  });
-
   let player;
   let id;
 

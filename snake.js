@@ -71,34 +71,18 @@ class Snake {
   }
 
   _checkCollisions() {
-    // With other snakes (including ours)
     this.snakes.forEach((s) => {
-      // Heads except ourself
       if (s !== this) {
         if (s.x === this.x && s.y === this.y) {
-          // The bigger survives
-          // ToDo: 3 outcomes
-          // - Same length = both die
-          if (s !== this && this.tail.length < s.tail.length) {
-            this.respawn();
-          } else {
-            s.respawn();
-          }
+          this.respawn();
+          s.respawn();
         }
+        s.tail.forEach((t) => {
+          if (t.x === this.x && t.y === this.y) {
+            this.respawn();
+          }
+        });
       }
-      // Tails
-      s.tail.forEach((t) => {
-        if (t.x === this.x && t.y === this.y) {
-          // The bigger survives
-          // ToDo: 3 outcomes
-          // - Same length = both die
-          if (s !== this && this.tail.length < s.tail.length) {
-            this.respawn();
-          } else {
-            s.respawn();
-          }
-        }
-      });
     });
     // With apples
     this.apples.forEach((a) => {

@@ -17,7 +17,6 @@ class Apple {
     this.y = (Math.random() * this.gridSize) | 0;
 
     this._checkCollisions();
-
     return this;
   }
 
