@@ -1,14 +1,15 @@
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var cors = require("cors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const cors = require("cors");
 require("dotenv").config();
 
-var jugadoresRouter = require("./routes/jugador");
-var paisRouter = require("./routes/pais");
+const playerRoutes = require("./routes/player");
+const countryRoutes = require("./routes/country");
+const authRoutes = require("./routes/auth");
 
-var app = express();
+const app = express();
 app.use(logger("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -22,8 +23,9 @@ const errorHandler = (error, req, res, next) => {
   res.status(500).send(`Something wrong ${error.message}`);
 };
 
-app.use("/jugadores", jugadoresRouter);
-app.use("/paises", paisRouter);
+app.use("/auth", authRoutes);
+app.use("/players", playerRoutes);
+app.use("/countries", countryRoutes);
 app.use(errorHandler);
 
 const server = require("http").Server(app);
@@ -46,31 +48,33 @@ let players = [];
 let apples = [];
 
 io.on("connection", function (client) {
-  client.on("message", function (message) {
-    io.emit("message", message);
-  });
-
   let player;
   let id;
 
-  client.on("auth", (opts, cb) => {
+  client.on("auth", (playerConfigurations, cb) => {
+    // recuperar jugador con auth y
+    // hacer player.nickname = Jugador.name y color
     // Create player
     id = ++autoId;
     player = new Snake(
-      _.assign(
-        {
-          id,
-          dir: "right",
-          gridSize: GRID_SIZE,
-          snakes: players,
-          apples,
-        },
-        opts
-      )
+      _.assign({
+        id,
+        dir: "right",
+        gridSize: GRID_SIZE,
+        snakes: players,
+        apples,
+        // color: playerConfigurations.color,
+        nickname: playerConfigurations.nickname,
+        color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+      })
     );
     players.push(player);
     // Callback with id
     cb({ id: autoId });
+  });
+
+  client.on("message", function (message) {
+    io.emit("message", player.nickname, message);
   });
 
   // Receive keystrokes
@@ -111,6 +115,7 @@ setInterval(() => {
       nickname: p.nickname,
       points: p.points,
       tail: p.tail,
+      color: p.color,
     })),
     apples: apples.map((a) => ({
       x: a.x,

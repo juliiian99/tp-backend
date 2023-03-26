@@ -1,12 +1,12 @@
-GET http://localhost:3000/paises HTTP/1.1
+GET http://localhost:3000/countries HTTP/1.1
 Content-Type: application/json
 Accept: */*
 ###
-GET http://localhost:3000/paises/Argentina HTTP/1.1
+GET http://localhost:3000/countries/Argentina HTTP/1.1
 Content-Type: application/json
 Accept: */*
 ###
-POST http://localhost:3000/paises HTTP/1.1
+POST http://localhost:3000/countries HTTP/1.1
 Content-Type: application/json
 Accept: */*
 
@@ -16,7 +16,7 @@ Accept: */*
   }
 }
 ###
-DELETE http://localhost:3000/jugadores/Argentina HTTP/1.1
+DELETE http://localhost:3000/players/Argentina HTTP/1.1
 Content-Type: application/json
 Accept: */*
 

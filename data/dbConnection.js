@@ -1,5 +1,7 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const connection = mongoose.createConnection('mongodb://localhost:27017/torneo');
+const connection = mongoose.createConnection(
+  "mongodb://localhost:27017/tournament"
+);
 
 module.exports = connection;
