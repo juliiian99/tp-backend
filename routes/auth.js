@@ -36,6 +36,7 @@ router.post("/login", function (req, res, next) {
     username: req.body.username,
     password: req.body.password,
   };
+  console.log(PlayerData);
   Player.findOne({ username: PlayerData.username }, (err, Player) => {
     if (err) return res.status(500).send("Server error!");
 
@@ -52,13 +53,14 @@ router.post("/login", function (req, res, next) {
           expiresIn: expiresIn,
         });
 
-        const dataPlayer = {
+        const playerData = {
+          username: Player.username,
           name: Player.name,
-          email: Player.email,
+          lastname: Player.lastname,
           accessToken: accessToken,
           expiresIn: expiresIn,
         };
-        res.send({ dataPlayer });
+        res.send({ playerData });
       } else {
         res.status(409).send({ message: "Something is wrong" });
       }
