@@ -6,7 +6,6 @@ const bcrypt = require("bcryptjs");
 const SECRET_KEY = "secretkey123456";
 
 router.post("/register", function (req, res, next) {
-  console.log("sadsadsadsa");
   const newPlayer = {
     nombre_usuario: req.body.name,
     password: bcrypt.hashSync(req.body.password),
@@ -14,7 +13,7 @@ router.post("/register", function (req, res, next) {
 
   Player.create(newPlayer, (err, player) => {
     if (err && err.code === 11000)
-      return res.status(409).send("Email already exists");
+      return res.status(409).send("El nombre de usuario ya existe");
     if (err) return res.status(500).send("Server error");
     const expiresIn = 24 * 60 * 60;
     const accessToken = jwt.sign({ id: player.id }, SECRET_KEY, {
@@ -26,41 +25,39 @@ router.post("/register", function (req, res, next) {
       accessToken: accessToken,
       expiresIn: expiresIn,
     };
-    // response
-    res.send({ playerData });
+    res.send(playerData);
   });
 });
 
 router.post("/login", function (req, res, next) {
-  const PlayerData = {
+  const playerData = {
     username: req.body.username,
     password: req.body.password,
   };
-  console.log(PlayerData);
-  Player.findOne({ username: PlayerData.username }, (err, Player) => {
+  Player.findOne({ username: playerData.username }, (err, player) => {
     if (err) return res.status(500).send("Server error!");
 
-    if (!Player) {
-      res.status(409).send({ message: "Something is wrong" });
+    if (!player) {
+      res.status(409).send({ message: "No se encontró el jugador" });
     } else {
       const resultPassword = bcrypt.compareSync(
-        PlayerData.password,
-        Player.password
+        playerData.password,
+        player.password
       );
       if (resultPassword) {
         const expiresIn = 24 * 60 * 60;
-        const accessToken = jwt.sign({ id: Player.id }, SECRET_KEY, {
+        const accessToken = jwt.sign({ id: player.id }, SECRET_KEY, {
           expiresIn: expiresIn,
         });
 
         const playerData = {
-          username: Player.username,
-          name: Player.name,
-          lastname: Player.lastname,
+          username: player.username,
+          name: player.name,
+          lastname: player.lastname,
           accessToken: accessToken,
           expiresIn: expiresIn,
         };
-        res.send({ playerData });
+        res.send(playerData);
       } else {
         res.status(409).send({ message: "Something is wrong" });
       }

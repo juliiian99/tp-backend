@@ -3,6 +3,7 @@ var router = express.Router();
 const Player = require("../schemas/playerSchema");
 const Pais = require("../schemas/countrySchema");
 const { body, validationResult } = require("express-validator");
+const verifyToken = require("../middleware/verifyToken");
 
 const validate = [
   body("player.username").not().isEmpty().isString(),
@@ -55,7 +56,7 @@ router.post("/", validate, async function (req, res) {
   }
 });
 
-router.put("/:username", validate, async function (req, res) {
+router.put("/:username", verifyToken, validate, async function (req, res) {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -93,7 +94,7 @@ router.get("/:username/country", async function (req, res) {
   }
 });
 
-router.post("/:username/country", async function (req, res) {
+router.post("/:username/country", verifyToken, async function (req, res) {
   try {
     let country = await Country.findByName(req.body.name);
     let player = await Player.findByName(req.params.username);
@@ -107,7 +108,7 @@ router.post("/:username/country", async function (req, res) {
   }
 });
 
-router.delete("/:username/country", async function (req, res) {
+router.delete("/:username/country", verifyToken, async function (req, res) {
   try {
     let player = await Player.findByName(req.params.username);
     player.country = null;
