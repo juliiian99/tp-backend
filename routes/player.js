@@ -1,9 +1,9 @@
 var express = require("express");
 var router = express.Router();
 const Player = require("../schemas/playerSchema");
-const Pais = require("../schemas/countrySchema");
 const { body, validationResult } = require("express-validator");
 const verifyToken = require("../middleware/verifyToken");
+const bcrypt = require("bcryptjs");
 
 const validate = [
   body("player.username").not().isEmpty().isString(),
@@ -18,7 +18,7 @@ const validate = [
   ),
 ];
 
-router.get("/", async function (req, res) {
+router.get("/", verifyToken, async function (req, res) {
   try {
     let players = JSON.parse(
       JSON.stringify(await Player.find().populate("country"))
@@ -29,7 +29,7 @@ router.get("/", async function (req, res) {
   }
 });
 
-router.get("/:username", async function (req, res) {
+router.get("/:username", verifyToken, async function (req, res) {
   try {
     let player = JSON.parse(
       JSON.stringify(
@@ -42,12 +42,17 @@ router.get("/:username", async function (req, res) {
   }
 });
 
-router.post("/", validate, async function (req, res) {
+router.post("/", verifyToken, validate, async function (req, res) {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
+
+    var salt = bcrypt.genSaltSync(10);
+    var hashedPassword = bcrypt.hashSync(req.body.player.password, salt);
+    req.body.player.password = hashedPassword;
+
     const newPlayer = new Player(req.body.player);
     await newPlayer.save();
     res.status(201).json();
@@ -63,7 +68,12 @@ router.put("/:username", verifyToken, validate, async function (req, res) {
       return res.status(400).json({ errors: errors.array() });
     }
     const filter = { username: req.params.username };
+
+    var salt = bcrypt.genSaltSync(10);
+    var hashedPassword = bcrypt.hashSync(req.body.player.password, salt);
+    req.body.player.password = hashedPassword;
     const update = req.body.player;
+
     await Player.updateOne(filter, update);
     res.status(204).json();
   } catch (e) {
@@ -71,7 +81,7 @@ router.put("/:username", verifyToken, validate, async function (req, res) {
   }
 });
 
-router.delete("/:username", function (req, res) {
+router.delete("/:username", verifyToken, function (req, res) {
   try {
     Player.deleteOne({ username: req.params.username }, function (err) {
       res.status(204).json();
@@ -81,7 +91,7 @@ router.delete("/:username", function (req, res) {
   }
 });
 
-router.get("/:username/country", async function (req, res) {
+router.get("/:username/country", verifyToken, async function (req, res) {
   try {
     let player = JSON.parse(
       JSON.stringify(

@@ -1,3 +1,5 @@
+const jwt = require("jsonwebtoken");
+
 module.exports = function verifyToken(req, res, next) {
   try {
     if (!req.headers.authorization) {
@@ -8,7 +10,7 @@ module.exports = function verifyToken(req, res, next) {
       return res.status(401).send("Unauhtorized Request");
     }
 
-    const payload = jwt.verify(token, "secretkey");
+    const payload = jwt.verify(token, "secretkey123456");
     if (!payload) {
       return res.status(401).send("Unauhtorized Request");
     }

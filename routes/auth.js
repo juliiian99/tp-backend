@@ -44,6 +44,7 @@ router.post("/login", function (req, res, next) {
         playerData.password,
         player.password
       );
+
       if (resultPassword) {
         const expiresIn = 24 * 60 * 60;
         const accessToken = jwt.sign({ id: player.id }, SECRET_KEY, {
